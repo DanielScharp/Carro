@@ -22,7 +22,32 @@ namespace Carro.Controllers
             veiculo = new VeiculoApp().Retornar(id);
             }
 
+            var combustiveis = new VeiculoApp().ListaCombustiveis();
+            ViewBag.ListarCombustiveis = combustiveis;
+            ViewBag.ListarCores = new VeiculoApp().ListaCores();
+
+
             return View(veiculo);
+        }
+
+        [HttpPost]
+        public ActionResult Veiculo(Veiculo veiculo)
+        {
+            if (veiculo.Id == 0)
+            {
+                new VeiculoApp().Salvar(veiculo);
+            } else
+            {
+                new VeiculoApp().Alterar(veiculo);            
+            }
+
+
+           
+            //Atualizar e permanecer na mesma pagina
+            return RedirectToAction("Veiculo", "Home", new { Id = veiculo.Id });
+
+            //Direciona para outra pagina
+            //return RedirectToAction("Index");
         }
     }
 }

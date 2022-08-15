@@ -1,11 +1,29 @@
 ﻿@model Carro.Models.Veiculo
 
+@using Carro.Models;
+
 @{
     ViewBag.Title = "Veiculo";
+
+    IEnumerable<VeiculoCombustivel> listaCombustiveis = ViewBag.ListarCombustiveis;
+    IEnumerable<VeiculoCor> listaCores = ViewBag.ListarCores;
 }
-
-<h2>@Model.Id</h2>
-<h2>@Model.Marca</h2>
-<h2>@Model.Combustivel</h2>
-<h2>@Model.Cor</h2>
-
+<form method="post" action="/Home/Veiculo">
+    <input type="hidden" name="Id" value="@Model.Id" />
+    <input type="text" name="Marca" value="@Model.Marca" />
+    <select name="CorId">
+        <option></option>
+        @foreach (var cores in listaCores)
+        {
+            <option value="@cores.Id" @(Model.CorId == cores.Id ? "selected" : "")>@cores.Nome</option>
+        }
+    </select>
+    <select name="CombustivelId">
+        <option></option>
+        @foreach (var combustiveis in listaCombustiveis)
+        {
+            <option value="@combustiveis.Id" @(Model.CombustivelId == combustiveis.Id ? "selected" : "")>@combustiveis.Nome</option>
+        }
+    </select>
+    <input type="submit" value="Enviar" />
+</form>

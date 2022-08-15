@@ -1,9 +1,7 @@
 ﻿using Carro.Models;
 using Carro.Repositorios;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace Carro.App
 {
@@ -19,11 +17,11 @@ namespace Carro.App
 
 
         }
-        public IEnumerable<Veiculo> Listar(string combustivel)
+        public IEnumerable<Veiculo> Listar(int combustivel)
         {
             using (var veiculos = new VeiculoRepositorio())
             {
-                var lista = veiculos.GetAll().Where(x => x.Combustivel == combustivel).ToList();
+                var lista = veiculos.GetAll().Where(x => x.CombustivelId == combustivel).ToList();
                 return lista;
             }
 
@@ -35,6 +33,43 @@ namespace Carro.App
             using( var veiculo = new VeiculoRepositorio())
             {
                 return veiculo.GetAll().Where(x => x.Id == id).FirstOrDefault();
+            }
+        }
+
+        public void Salvar(Veiculo veiculo)
+        {
+            using (var veiculos = new VeiculoRepositorio())
+            {
+                veiculos.Adicionar(veiculo);
+                veiculos.SalvarTodos();
+            }
+            
+        }
+
+        public Veiculo Alterar(Veiculo veiculo)
+        {
+            using (var veiculos = new VeiculoRepositorio())
+            {
+                veiculos.Atualizar(veiculo);
+                veiculos.SalvarTodos();
+            }
+            return veiculo;
+
+        }
+
+        public List<VeiculoCombustivel> ListaCombustiveis()
+        {
+            using(var combustiveis = new VeiculoCombustivelRepositorio())
+            {
+                 return combustiveis.GetAll().ToList();
+            }
+        }
+
+        public List<VeiculoCor> ListaCores()
+        {
+            using (var cores = new VeiculoCorRepositorio())
+            {
+                return cores.GetAll().ToList();
             }
         }
     }
