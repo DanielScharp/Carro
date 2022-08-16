@@ -50,5 +50,11 @@ namespace Carro.Controllers
             //return RedirectToAction("Index");
         }
 
+        [HttpPost]
+        public ActionResult SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
+        {
+            new VeiculoApp().SalvarOcorrencia(ocorrencia);
+            return RedirectToAction("Veiculo", "Home", new { Id = ocorrencia.VeiculoId });
+        }
     }
 }

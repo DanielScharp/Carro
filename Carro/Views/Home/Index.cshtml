@@ -4,28 +4,28 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Lista de veiculos</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <td>Id</td>
-        <td>Marca</td>
-        <td>Combustivel</td>
-        <td>Cor</td>
-        <td>Botão</td>
-    </tr>
-    
-    @foreach(var veiculo in Model)
-            {
-<tr>
-    <td>@veiculo.Id</td>
-    <td>@veiculo.Marca</td>
-    <td>@(veiculo.CombustivelId > 0 ? veiculo.Combustivel.Nome : "")</td>
-    <td>@veiculo.Cor.Nome</td>
-    <td> <a href="/home/Veiculo/@veiculo.Id">Details</a></td>
-</tr>
-            }
-</table>
+
+<div class="blocoIndex">
+    <table class="table">
+        <tr>
+            <th>Id</th>
+            <th>Marca</th>
+            <th>Combustivel</th>
+            <th>Cor</th>
+            <th>Botão</th>
+        </tr>
+
+        @foreach (var veiculo in Model)
+        {
+            <tr>
+                <td>@veiculo.Id</td>
+                <td>@veiculo.Marca</td>
+                <td>@(veiculo.CombustivelId > 0 ? veiculo.Combustivel.Nome : "")</td>
+                <td>@veiculo.Cor.Nome</td>
+                <td> <a href="/home/Veiculo/@veiculo.Id">Details</a></td>
+            </tr>
+        }
+    </table>
+</div>

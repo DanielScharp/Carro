@@ -10,47 +10,56 @@
     IEnumerable<VeiculoCor> listaCores = ViewBag.ListarCores;
     IEnumerable<VeiculoOcorrencia> listaOcorrencias = ViewBag.ListarOcorrencias;
 }
-<form method="post" action="/Home/Veiculo">
-    <input type="hidden" name="Id" value="@Model.Id" />
-    <input type="text" name="Marca" value="@Model.Marca" />
-    <select name="CorId">
-        <option></option>
-        @foreach (var cores in listaCores)
-        {
-            <option value="@cores.Id" @(Model.CorId == cores.Id ? "selected" : "")>@cores.Nome</option>
-        }
-    </select>
-    <select name="CombustivelId">
-        <option></option>
-        @foreach (var combustiveis in listaCombustiveis)
-        {
-            <option value="@combustiveis.Id" @(Model.CombustivelId == combustiveis.Id ? "selected" : "")>@combustiveis.Nome</option>
-        }
-    </select>
-    <input type="submit" value="Enviar" />
+<div class="bloco">
 
-</form>
+    <h2>Veiculo @Model.Id</h2>
+    <form method="post" action="/Home/Veiculo">
+        <input type="hidden" name="Id" value="@Model.Id" />
+        <input type="text" name="Marca" value="@Model.Marca" />
+        <select name="CorId">
+            <option></option>
+            @foreach (var cores in listaCores)
+            {
+                <option value="@cores.Id" @(Model.CorId == cores.Id ? "selected" : "")>@cores.Nome</option>
+            }
+        </select>
+        <select name="CombustivelId">
+            <option></option>
+            @foreach (var combustiveis in listaCombustiveis)
+            {
+                <option value="@combustiveis.Id" @(Model.CombustivelId == combustiveis.Id ? "selected" : "")>@combustiveis.Nome</option>
+            }
+        </select>
+        <input type="submit" value="Enviar" />
 
-<table class="table">
-    <tr>
-        <td>Veiculo</td>
-        <td>Obs</td>
-        <td>Data</td>
-    </tr>
+    </form>
 
-    @foreach (var ocorrencias in listaOcorrencias)
-    {
+    <h2>Ocorrencias do veiculo @Model.Id</h2>
+
+    <table class="table">
         <tr>
-            <td>@ocorrencias.Marca.Marca</td>
-            <td>@ocorrencias.Obs</td>
-            <td>@ocorrencias.Data</td>
+            <td>Veiculo</td>
+            <td>Obs</td>
+            <td>Data</td>
         </tr>
-    }
-</table>
-<form method="post" action="/Home/">
-    <input type="text" name="Obs" />
-    <input type="datetime" name="Data" />
-    <input type="submit" value="Enviar" />
 
-</form>
+        @foreach (var ocorrencias in listaOcorrencias)
+        {
+            <tr>
+                <td>@ocorrencias.Marca.Marca</td>
+                <td>@ocorrencias.Obs</td>
+                <td>@ocorrencias.Data</td>
+            </tr>
+        }
+    </table>
 
+    <h3>Adicionar Observação</h3>
+    <form method="post" action="/Home/SalvarOcorrencia">
+        <input type="hidden" name="VeiculoId" value="@Model.Id" />
+        <input type="text" name="Obs" />
+        <input type="datetime" name="Data" />
+        <input type="submit" value="Enviar" />
+    </form>
+
+
+</div>

@@ -46,6 +46,8 @@ namespace Carro.App
             
         }
 
+       
+
         public Veiculo Alterar(Veiculo veiculo)
         {
             using (var veiculos = new VeiculoRepositorio())
@@ -86,6 +88,15 @@ namespace Carro.App
             using(var ocorrencias = new VeiculoOcorrenciaRepositorio())
             {
                 return ocorrencias.GetAll().Where(x => x.VeiculoId == veiculoId).ToList();
+            }
+        }
+
+        public void SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
+        {
+            using(var conn = new VeiculoOcorrenciaRepositorio())
+            {
+                conn.Adicionar(ocorrencia);
+                conn.SalvarTodos();
             }
         }
     }

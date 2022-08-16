@@ -1,18 +1,38 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+.navbar {
+    background: #a8a1a1;
+    padding: 10px;
+    margin-bottom: 10px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.navbar-brand {
+    color: #fff;
+    text-decoration: none;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.navbar-brand:hover {
+    color: #00ff90;
+    text-decoration: none;
 }
 
+.blocoIndex {
+    margin-left:20px;
+    margin-bottom: 20px;
+}
+
+.bloco {
+    width: 400px;
+    margin: 0 auto;
+}
+
+.bloco h3 {
+    margin: 10px 0;
+}
+
+h2 {
+    text-align: center;
+    margin: 10px;
+}
