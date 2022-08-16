@@ -30,6 +30,13 @@ namespace Carro.Controllers
             return View(veiculo);
         }
 
+        public ActionResult BuscaVeiculo(Veiculo busca)
+        {
+            //var veiculo = new VeiculoApp().Retornar(busca.Id);
+            return RedirectToAction("Veiculo", "Home", new { Id = busca.Id });
+
+        }
+
         [HttpPost]
         public ActionResult Veiculo(Veiculo veiculo)
         {

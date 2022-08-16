@@ -12,6 +12,11 @@
         <div class="container">
             <div class="navbar-header">
                 @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                 
+                <form action="/Home/BuscaVeiculo">
+                    <input type="text" name="Id"/>
+                    <input type="submit" value="Buscar" />
+                </form>
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
