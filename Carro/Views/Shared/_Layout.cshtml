@@ -14,7 +14,16 @@
                 @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
                  
                 <form action="/Home/BuscaVeiculo">
-                    <input type="text" name="Id"/>
+                    <select name="CombustivelId">
+                        <option value="1"> Gasolina</option>
+                        <option value="2"> Alcool</option>
+                        <option value="3"> Disel</option>
+                    </select>
+                    <select name="CorId">
+                        <option value="1"> Preto</option>
+                        <option value="2"> Cinza</option>
+                        <option value="3"> Branco</option>
+                    </select>
                     <input type="submit" value="Buscar" />
                 </form>
             </div>
