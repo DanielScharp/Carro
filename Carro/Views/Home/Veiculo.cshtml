@@ -1,5 +1,6 @@
 ﻿@model Carro.Models.Veiculo
 
+
 @using Carro.Models;
 
 @{
@@ -7,6 +8,7 @@
 
     IEnumerable<VeiculoCombustivel> listaCombustiveis = ViewBag.ListarCombustiveis;
     IEnumerable<VeiculoCor> listaCores = ViewBag.ListarCores;
+    IEnumerable<VeiculoOcorrencia> listaOcorrencias = ViewBag.ListarOcorrencias;
 }
 <form method="post" action="/Home/Veiculo">
     <input type="hidden" name="Id" value="@Model.Id" />
@@ -26,4 +28,29 @@
         }
     </select>
     <input type="submit" value="Enviar" />
+
 </form>
+
+<table class="table">
+    <tr>
+        <td>Veiculo</td>
+        <td>Obs</td>
+        <td>Data</td>
+    </tr>
+
+    @foreach (var ocorrencias in listaOcorrencias)
+    {
+        <tr>
+            <td>@ocorrencias.Marca.Marca</td>
+            <td>@ocorrencias.Obs</td>
+            <td>@ocorrencias.Data</td>
+        </tr>
+    }
+</table>
+<form method="post" action="/Home/">
+    <input type="text" name="Obs" />
+    <input type="datetime" name="Data" />
+    <input type="submit" value="Enviar" />
+
+</form>
+

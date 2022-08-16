@@ -25,7 +25,7 @@ namespace Carro.Controllers
             var combustiveis = new VeiculoApp().ListaCombustiveis();
             ViewBag.ListarCombustiveis = combustiveis;
             ViewBag.ListarCores = new VeiculoApp().ListaCores();
-
+            ViewBag.ListarOcorrencias = new VeiculoApp().ListaOcorrencias(id);
 
             return View(veiculo);
         }
@@ -49,5 +49,6 @@ namespace Carro.Controllers
             //Direciona para outra pagina
             //return RedirectToAction("Index");
         }
+
     }
 }

@@ -13,5 +13,7 @@ namespace Carro.Database
 
         public DbSet<Veiculo> Veiculos { get; set; }
 
+        public DbSet<VeiculoOcorrencia> VeiculoOcorrencias { get; set; }
+
     }
 }

@@ -156,11 +156,13 @@
     <Compile Include="Models\Veiculo.cs" />
     <Compile Include="Models\VeiculoCombustivel.cs" />
     <Compile Include="Models\VeiculoCor.cs" />
+    <Compile Include="Models\VeiculoOcorrencia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositorios\Base\IRepositorio.cs" />
     <Compile Include="Repositorios\Base\Repositorio.cs" />
     <Compile Include="Repositorios\VeiculoCombustivelRepositorio.cs" />
     <Compile Include="Repositorios\VeiculoCorRepositorio.cs" />
+    <Compile Include="Repositorios\VeiculoOcorrenciaRepositorio.cs" />
     <Compile Include="Repositorios\VeiculoRepositorio.cs" />
   </ItemGroup>
   <ItemGroup>

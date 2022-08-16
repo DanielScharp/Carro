@@ -72,5 +72,21 @@ namespace Carro.App
                 return cores.GetAll().ToList();
             }
         }
+
+        public List<VeiculoOcorrencia> ListaOcorrencias()
+        {
+            using (var ocorrencias = new VeiculoOcorrenciaRepositorio())
+            {
+                return ocorrencias.GetAll().ToList();
+            }
+        }
+
+        public List<VeiculoOcorrencia> ListaOcorrencias(int veiculoId)
+        {
+            using(var ocorrencias = new VeiculoOcorrenciaRepositorio())
+            {
+                return ocorrencias.GetAll().Where(x => x.VeiculoId == veiculoId).ToList();
+            }
+        }
     }
 }
