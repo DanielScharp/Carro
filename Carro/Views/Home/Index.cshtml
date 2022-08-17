@@ -35,11 +35,7 @@
 </div>
 
 <script>
-    $.ajax({
-        url: "/Home/ListarVeiculos",
-        method: "get",
-        success: function (data) {
-            $("#divVeiculo").html(data)
-        }
+    $.get("/Home/ListarVeiculos", function (data) {
+        $("#divVeiculo").html(data)
     })
 </script>
