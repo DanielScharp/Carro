@@ -17,16 +17,6 @@ namespace Carro.App
 
 
         }
-        public IEnumerable<Veiculo> Listar(int combustivel)
-        {
-            using (var veiculos = new VeiculoRepositorio())
-            {
-                var lista = veiculos.GetAll().Where(x => x.CombustivelId == combustivel).ToList();
-                return lista;
-            }
-
-
-        }
 
         public Veiculo Retornar(int id)
         {
@@ -46,8 +36,7 @@ namespace Carro.App
             
         }
 
-       
-
+  
         public Veiculo Alterar(Veiculo veiculo)
         {
             using (var veiculos = new VeiculoRepositorio())
@@ -72,14 +61,6 @@ namespace Carro.App
             using (var cores = new VeiculoCorRepositorio())
             {
                 return cores.GetAll().ToList();
-            }
-        }
-
-        public List<VeiculoOcorrencia> ListaOcorrencias()
-        {
-            using (var ocorrencias = new VeiculoOcorrenciaRepositorio())
-            {
-                return ocorrencias.GetAll().ToList();
             }
         }
 
