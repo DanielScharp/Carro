@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Carro.Models.Veiculo>
+
+@{
+    Layout = null;
+}
+
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Marca</th>
+        <th>Combustivel</th>
+        <th>Cor</th>
+        <th>Botão</th>
+    </tr>
+    @foreach (var veiculo in Model)
+    {
+<tr>
+    <td>@veiculo.Id</td>
+    <td>@veiculo.Marca</td>
+    <td>@veiculo.Combustivel.Nome</td>
+    <td>@veiculo.Cor.Nome</td>
+    <td></td>
+</tr>
+    }
+</table>

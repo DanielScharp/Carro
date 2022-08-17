@@ -30,3 +30,16 @@
         }
     </table>
 </div>
+<div id="divVeiculo">
+
+</div>
+
+<script>
+    $.ajax({
+        url: "/Home/ListarVeiculos",
+        method: "get",
+        success: function (data) {
+            $("#divVeiculo").html(data)
+        }
+    })
+</script>
