@@ -6,15 +6,11 @@
 
 <h2>Lista de veiculos</h2>
 
-<button id="CarregarVeiculo">
-    carregar
-</button>
+
 <div id="divVeiculo"></div>
 
 <script>
-    $("#CarregarVeiculo").click(function () {
         CarregarVeiculos()
-    })
 
     function CarregarVeiculos() {
         $.get("/Home/ListarVeiculos", function (data) {

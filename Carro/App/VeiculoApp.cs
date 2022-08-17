@@ -85,8 +85,9 @@ namespace Carro.App
         {
             using(var conexao = new VeiculoRepositorio())
             {
+                
                 return conexao.GetAll().Where(x => x.CombustivelId == veiculo.CombustivelId && x.CorId == veiculo.CorId).ToList();
-
+                
             }
         }
 
