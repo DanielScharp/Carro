@@ -13,24 +13,24 @@
 <div class="bloco">
 
     <h2>Veiculo @Model.Id</h2>
-    <form method="post" action="/Home/Veiculo">
-        <input type="hidden" name="Id" value="@Model.Id" />
-        <input type="text" name="Marca" value="@Model.Marca" />
-        <select name="CorId">
+    <form id="formVeiculo">
+        <input id="Id" type="hidden" name="Id" value="@Model.Id" />
+        <input id="Marca" type="text" name="Marca" value="@Model.Marca" />
+        <select id="CorId" name="CorId">
             <option></option>
             @foreach (var cores in listaCores)
             {
                 <option value="@cores.Id" @(Model.CorId == cores.Id ? "selected" : "")>@cores.Nome</option>
             }
         </select>
-        <select name="CombustivelId">
+        <select id="CombustivelId" name="CombustivelId">
             <option></option>
             @foreach (var combustiveis in listaCombustiveis)
             {
                 <option value="@combustiveis.Id" @(Model.CombustivelId == combustiveis.Id ? "selected" : "")>@combustiveis.Nome</option>
             }
         </select>
-        <input type="submit" value="Enviar" />
+        <button type="button" onclick="SalvarVeiculo()">Salvar</button>
 
     </form>
 
@@ -52,6 +52,31 @@
 </div>
 
 <script>
+
+    function SalvarVeiculo() {
+        /*var json = {
+            Id: $("#Id").val(),
+            Marca: $("#Marca").val(),
+            CorId: $("#CorId").val(),
+            CombustivelId: $("#CombustivelId").val()
+        }*/
+
+        var json = $("#formVeiculo").serialize()
+
+        
+
+        $.ajax({
+            url: "/Home/SalvarVeiculo",
+            method: "post",
+            data: json,
+            success: function (data) {
+                console.log(data);
+            }
+        })
+    }
+
+
+
     chamarOcorrencias()
 
     //-----------------------------------
