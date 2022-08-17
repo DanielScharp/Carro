@@ -36,35 +36,47 @@
 
     <h2>Ocorrencias do veiculo @Model.Id</h2>
 
-    <table class="table">
-        <tr>
-            <td>Veiculo</td>
-            <td>Obs</td>
-            <td>Data</td>
-        </tr>
+    <div id="ListarOcorrencia"></div>
 
-        @foreach (var ocorrencias in listaOcorrencias)
-        {
-            <tr>
-                <td>@ocorrencias.Marca.Marca</td>
-                <td>@ocorrencias.Obs</td>
-                <td>@ocorrencias.Data</td>
-            </tr>
-        }
-    </table>
-   
+
     <h3>Adicionar Observação</h3>
 
-    <form method="post" action="/Home/SalvarOcorrencia">
+    <form>
         <input id="VeiculoId" type="hidden" name="VeiculoId" value="@Model.Id" />
-        <input type="text" name="Obs" />
-        <input type="datetime" name="Data" />
-        <input type="submit" value="Enviar" />
+        <input id="Obs" type="text" name="Obs" />
+        <input id="Data" type="datetime" name="Data" />
+        <button type="button" id="btSalvarOcorrencia" onclick="SalvarOcorrencia()">Cadastrar</button>
     </form>
 
 
 </div>
-<script>
-    console.log($('#VeiculoId').val())
 
+<script>
+    chamarOcorrencias()
+
+    //-----------------------------------
+    function chamarOcorrencias() {
+            $.get("/Home/ListarOcorrencias?id=@Model.Id", function (data) {
+        $("#ListarOcorrencia").html(data)
+    })
+    };
+
+    //-----------------------------------
+
+    function SalvarOcorrencia() {
+        var json = {
+            VeiculoId: $("#VeiculoId").val(),
+            Obs: $("#Obs").val(),
+            Data: $("#Data").val()
+        }
+
+        $.ajax({
+            url: "/Home/SalvarOcorrencia",
+            method: "post",
+            data: json,
+            success: function (data) {
+                chamarOcorrencias();
+            }
+        })
+    }
 </script>

@@ -61,13 +61,20 @@ namespace Carro.Controllers
         public ActionResult SalvarOcorrencia(VeiculoOcorrencia ocorrencia)
         {
             new VeiculoApp().SalvarOcorrencia(ocorrencia);
-            return RedirectToAction("Veiculo", "Home", new { Id = ocorrencia.VeiculoId });
+            return Json("ok", JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult ListarVeiculos()
         {
             var listar = new VeiculoApp().Listar();
             return View(listar);
+        }
+
+        public ActionResult ListarOcorrencias(int id)
+        {
+            var listar = new VeiculoApp().ListaOcorrencias(id);
+            return View(listar);
+
         }
     }
 }

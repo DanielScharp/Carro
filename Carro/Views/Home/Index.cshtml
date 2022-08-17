@@ -6,36 +6,20 @@
 
 <h2>Lista de veiculos</h2>
 
-
-<div class="blocoIndex">
-    <table class="table">
-        <tr>
-            <th>Id</th>
-            <th>Marca</th>
-            <th>Combustivel</th>
-            <th>Cor</th>
-            <th>Botão</th>
-        </tr>
-
-        @foreach (var veiculo in Model)
-        {
-            <tr>
-                <td>@veiculo.Id</td>
-                <td>@veiculo.Marca</td>
-                <td>@(veiculo.CombustivelId > 0 ? veiculo.Combustivel.Nome : "")</td>
-                <td>@veiculo.Cor.Nome</td>
-                 
-                <td> <a href="/home/Veiculo/@veiculo.Id">Details</a></td>
-            </tr>
-        }
-    </table>
-</div>
-<div id="divVeiculo">
-
-</div>
+<button id="CarregarVeiculo">
+    carregar
+</button>
+<div id="divVeiculo"></div>
 
 <script>
-    $.get("/Home/ListarVeiculos", function (data) {
-        $("#divVeiculo").html(data)
+    $("#CarregarVeiculo").click(function () {
+        CarregarVeiculos()
     })
+
+    function CarregarVeiculos() {
+        $.get("/Home/ListarVeiculos", function (data) {
+            $("#divVeiculo").html(data)
+        })
+    }
+    
 </script>
