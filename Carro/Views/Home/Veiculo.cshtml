@@ -56,7 +56,7 @@
     <h3>Adicionar Observação</h3>
 
     <form method="post" action="/Home/SalvarOcorrencia">
-        <input type="hidden" name="VeiculoId" value="@Model.Id" />
+        <input id="VeiculoId" type="hidden" name="VeiculoId" value="@Model.Id" />
         <input type="text" name="Obs" />
         <input type="datetime" name="Data" />
         <input type="submit" value="Enviar" />
@@ -64,3 +64,6 @@
 
 
 </div>
+<script>
+    console.log($('#VeiculoId').val())
+</script>
