@@ -19,7 +19,7 @@
                 <option value="2"> Cinza</option>
                 <option value="3"> Branco</option>
             </select>
-            <button type="button" class="btn btn-primary" onClick="retornarVeiculos()">Buscar</button> 
+            <button type="button" class="btn btn-primary" onclick="retornarVeiculos()">Buscar</button>
         </form>
     </div>
     <div class="col-sm-8" id="DivVeiculo"></div>
@@ -52,7 +52,7 @@
 
     function retornarVeiculos() {
         $.ajax({
-            url: "/Veiculo/PesquisarVeiculo",
+            url: "/Veiculo/PesquisarVeiculo?CombustivelId=1&CorId=1",
             method: "get",
             beforeSend: function () {
                 $("#DivVeiculo").html("Aguarde...")
