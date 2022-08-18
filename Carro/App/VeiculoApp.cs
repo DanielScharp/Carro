@@ -56,7 +56,7 @@ namespace Carro.App
             }
         }
 
-        public List<VeiculoCor> ListaCores()
+        public List<VeiculoCor> ListarCores()
         {
             using (var cores = new VeiculoCorRepositorio())
             {

@@ -1,0 +1,72 @@
+﻿@model Carro.Models.Veiculo
+@using Carro.Models;
+@{
+    Layout = null;
+
+    IEnumerable<VeiculoCombustivel> listaCombustiveis = ViewBag.ListarCombustiveis;
+    IEnumerable<VeiculoCor> listaCores = ViewBag.ListarCores;
+}
+
+<form id="formVeiculo" class="form">
+    <label>Id</label>
+    <input id="Id" name="Id" class="form-control" value="@Model.Id" />
+    <div class="row">
+        <div class="col-sm-4">
+            <label>Marca</label>
+            <input id="Marca" name="Marca" class="form-control" value="@Model.Marca" />
+        </div>
+        <div class="col-sm-4">
+
+            <label>Combustivel</label>
+            <select id="CombustivelId" name="CombustivelId" class="form-select" >
+                <option value="0"></option>
+                @foreach (var combustivel in listaCombustiveis)
+                {
+                    <option value="@combustivel.Id" @(Model.CombustivelId == combustivel.Id ? "selected" : "")>@combustivel.Nome</option>
+                }
+            </select>
+        </div>
+        <div class="col-sm-4">
+
+            <label>Cor</label>
+            <select id="CorId" name="CorId"class="form-select">
+                <option></option>
+                @foreach (var Cor in listaCores)
+                {
+                    <option value="@Cor.Id" @(Model.CorId == Cor.Id ? "selected" : "")>@Cor.Nome</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+            <button type="button" class="btn btn-outline-primary  btn-mg btn-block" onclick="SalvarVeiculo()">Salvar</button>
+    </div>
+</form>
+
+<script>
+    function SalvarVeiculo() {
+        var json = $("#formVeiculo").serialize();
+
+        if ($("#CombustivelId").val() == 0 || $("#CombustivelId").val() == "") {
+            alert("Informe o Combustivel")
+            return false
+        }
+        if ($("#CorId").val() == 0 || $("#CorId").val() == "") {
+            alert("Informe a cor")
+            return false
+        }
+
+        $.ajax({
+            url: "/Veiculo/SalvarVeiculo",
+            method: "post",
+            data: json,
+            success: function (data) {
+                if (data.Success == true) {
+                    alert(data.Menssagem)
+                } else {
+                    alert(data.Menssagem)
+                }
+            }
+        })
+    }
+</script>

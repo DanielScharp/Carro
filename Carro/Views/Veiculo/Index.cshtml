@@ -1,0 +1,40 @@
+﻿@model Carro.Models.Veiculo
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div class="row">
+    <div class="col-sm-4" id="DivBusca"></div>
+    <div class="col-sm-8" id="DivVeiculo"></div>
+</div>
+
+<script>
+    function retornarVeiculo(id) {
+        $.ajax({
+            url: "/Veiculo/RetornarVeiculo?Id=" + id,
+            method: "get",
+            success: function (data) {
+                $("#DivVeiculo").html(data)
+            }
+        })
+    }
+
+
+    retornarLista()
+
+
+    function retornarLista() {
+        $.ajax({
+            url: "/Veiculo/ListarVeiculos",
+            method: "get",
+            beforeSend: function () {
+                $("#DivVeiculo").html("Aguarde...")
+            },
+            success: function (data) {
+                    $("#DivVeiculo").html(data)
+            }
+        })
+    }
+</script>
