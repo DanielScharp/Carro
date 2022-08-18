@@ -57,5 +57,11 @@ namespace Carro.Controllers
             }
 
         }
+
+        public ActionResult PesquisarVeiculo(Veiculo veiculo)
+        {
+            var busca = _veiculoApp.BuscarVeiculos(veiculo);
+            return View("_PesquisarVeiculo", busca);
+        }
     }
 }

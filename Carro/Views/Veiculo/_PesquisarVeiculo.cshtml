@@ -1,0 +1,23 @@
+﻿@model IEnumerable<Carro.Models.Veiculo>
+
+@{
+    Layout = null;
+}
+
+    <table>
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Marca)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CombustivelId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CorId)
+            </td>
+
+        </tr>
+    }
+    
+    </table>
