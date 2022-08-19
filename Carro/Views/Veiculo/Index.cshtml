@@ -1,7 +1,10 @@
 ﻿@model Carro.Models.Veiculo
+@using Carro.Models;
+
 
 @{
     ViewBag.Title = "Index";
+
 }
 
 
@@ -9,17 +12,23 @@
     <div class="col-sm-4" id="DivBusca">
 
         <form class="form">
-            <select class="form-select" name="CombustivelId">
+            <select class="form-select" name="CombustivelId" id="CombustivelId">
                 <option value="1"> Gasolina</option>
                 <option value="2"> Alcool</option>
                 <option value="3"> Disel</option>
             </select>
-            <select class="form-select" name="CorId">
+            <select class="form-select" name="CorId" id="CorId">
                 <option value="1"> Preto</option>
-                <option value="2"> Cinza</option>
-                <option value="3"> Branco</option>
+                <option value="2"> Branco</option>
+                <option value="3"> Cinza</option>
+                <option value="4"> Rosa</option>
+                <option value="5"> Verde</option>
+                <option value="6"> Vermelho</option>
+                <option value="7"> Roxo</option>
+
+
             </select>
-            <button type="button" class="btn btn-primary" onclick="retornarVeiculos()">Buscar</button>
+            <button type="button" class="btn btn-primary" onclick="guardarDados()">Buscar</button>
         </form>
     </div>
     <div class="col-sm-8" id="DivVeiculo"></div>
@@ -45,14 +54,22 @@
                 $("#DivVeiculo").html("Aguarde...")
             },
             success: function (data) {
-                    $("#DivVeiculo").html(data)
+                $("#DivVeiculo").html(data)
             }
         })
     }
 
-    function retornarVeiculos() {
+    function guardarDados() {
+        var inputCombustivel = document.querySelector("#CombustivelId");
+        var inputCor = document.querySelector("#CorId");
+        var  inputCombustivelValue = inputCombustivel.value;
+        var inputCorValue = inputCor.value;
+        retornarVeiculos(inputCombustivelValue, inputCorValue)
+    }
+
+    function retornarVeiculos(combustivel, cor) {
         $.ajax({
-            url: "/Veiculo/PesquisarVeiculo?CombustivelId=1&CorId=1",
+            url: "/Veiculo/PesquisarVeiculo?CombustivelId=" + combustivel + "&CorId=" + cor,
             method: "get",
             beforeSend: function () {
                 $("#DivVeiculo").html("Aguarde...")

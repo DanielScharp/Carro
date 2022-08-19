@@ -4,20 +4,27 @@
     Layout = null;
 }
 
-    <table>
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Marca)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CombustivelId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CorId)
-            </td>
+    <table class="table">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Marca</th>
+                <th scope="col">Combustivel</th>
+                <th scope="col">Cor</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var veiculo in Model) {
+                <tr>
+                    <td style="color:#0000ff; text-decoration:underline; cursor:pointer" onclick="retornarVeiculo(@veiculo.Id)">
+                        @veiculo.Id.ToString("0000")
+                    </td>
+                    <td>@veiculo.Marca</td>
+                    <td>@veiculo.Combustivel.Nome</td>
+                    <td>@veiculo.Cor.Nome</td>
+                </tr>
+            }
+        </tbody>
 
-        </tr>
-    }
-    
     </table>
