@@ -1,0 +1,142 @@
+﻿@model Carro.Models.Veiculo
+@using Carro.Models;
+@{
+    Layout = null;
+
+    IEnumerable<VeiculoCombustivel> listaCombustiveis = ViewBag.ListarCombustiveis;
+    IEnumerable<VeiculoCor> listaCores = ViewBag.ListarCores;
+    IEnumerable<VeiculoOcorrencia> listaOcorrencias = ViewBag.ListarOcorrencia;
+}
+
+<form id="formVeiculo" class="form">
+    <label>Id</label>
+    <input id="Id" name="Id" type="hidden" class="form-control" value="@Model.Id" />
+    <input  class="form-control"  type="text" value="@Model.Id" disabled />
+    <div class="row">
+        <div class="col-sm-4">
+            <label>Marca</label>
+            <input id="Marca" name="Marca" class="form-control" value="@Model.Marca" />
+        </div>
+        <div class="col-sm-4">
+
+            <label>Combustivel</label>
+            <select id="CombustivelId" name="CombustivelId" class="form-select" >
+                <option value="0"></option>
+                @foreach (var combustivel in listaCombustiveis)
+                {
+                    <option value="@combustivel.Id" @(Model.CombustivelId == combustivel.Id ? "selected" : "")>@combustivel.Nome</option>
+                }
+            </select>
+        </div>
+        <div class="col-sm-4">
+
+            <label>Cor</label>
+            <select id="CorId" name="CorId"class="form-select">
+                <option></option>
+                @foreach (var Cor in listaCores)
+                {
+                    <option value="@Cor.Id" @(Model.CorId == Cor.Id ? "selected" : "")>@Cor.Nome</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row">
+            <button type="button" class="btn btn-outline-primary btn-mg btn-block mt-3" onclick="SalvarVeiculo()">Salvar</button>
+    </div>
+</form>
+
+<form id="formOcorrencia" class="form">
+    <div class="row">
+        <div>
+            <input id="VeiculoId" name="VeiculoId" type="hidden" value="@Model.Id" />
+        </div>
+        <div class="col-sm-4">
+            <label>Observação</label>
+            <input id="Obs" name="Obs" class="form-control" />
+        </div>
+
+        <!--
+
+        <div class="col-sm-4">
+
+            <label>Data</label>
+            <input id="Data" name="Data" class="form-control" />
+
+         </div>
+     -->
+
+    </div>
+    <div class="row">
+        <button type="button" class="btn btn-outline-primary btn-mg btn-block mt-3" onclick="SalvarOcorrencia()">Salvar</button>
+    </div>
+</form>
+<div id="DivOcorrencias"></div>
+
+<script>
+    function SalvarVeiculo() {
+        var json = $("#formVeiculo").serialize();
+
+        if ($("#CombustivelId").val() == 0 || $("#CombustivelId").val() == "") {
+            alert("Informe o Combustivel")
+            return false
+        }
+        if ($("#CorId").val() == 0 || $("#CorId").val() == "") {
+            alert("Informe a cor")
+            return false
+        }
+
+        $.ajax({
+            url: "/Veiculo/SalvarVeiculo",
+            method: "post",
+            data: json,
+            success: function (data) {
+                if (data.Sucesso == true) {
+                    alert(data.Menssagem)
+                    retornarVeiculo(data.Id)
+                } else {
+                    alert(data.Menssagem)
+
+                }
+            }
+        })
+    }
+
+    function retornarOcorrencia(id) {
+        $.ajax({
+            url: "/Veiculo/ListarOcorrencias?Id="+ id,
+            method: "get",
+            beforeSend: function () {
+                $("#DivOcorrencias").html("Aguarde...")
+            },
+            success: function (data) {
+                $("#DivOcorrencias").html(data)
+            }
+        })
+    }
+
+    function SalvarOcorrencia() {
+        var json = $("#formOcorrencia").serialize();
+
+        if ($("#Obs").val() == 0 || $("#Obs").val() == "") {
+            alert("Informe a Obs")
+            return false
+        }
+
+
+        $.ajax({
+            url: "/Veiculo/SalvarOcorrencia",
+            method: "post",
+            data: json,
+            success: function (data) {
+                if (data.Sucesso == true) {
+                    alert(data.Menssagem)
+                    retornarOcorrencia(data.Id)
+                } else {
+                    alert(data.Menssagem)
+
+                }
+            }
+        })
+    }
+
+</script>

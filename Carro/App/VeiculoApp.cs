@@ -2,6 +2,7 @@
 using Carro.Repositorios;
 using System.Collections.Generic;
 using System.Linq;
+using System;
 
 namespace Carro.App
 {
@@ -56,7 +57,7 @@ namespace Carro.App
             }
         }
 
-        public List<VeiculoCor> ListaCores()
+        public List<VeiculoCor> ListarCores()
         {
             using (var cores = new VeiculoCorRepositorio())
             {
@@ -76,6 +77,7 @@ namespace Carro.App
         {
             using(var conn = new VeiculoOcorrenciaRepositorio())
             {
+                ocorrencia.Data = DateTime.Now;
                 conn.Adicionar(ocorrencia);
                 conn.SalvarTodos();
             }
@@ -85,9 +87,26 @@ namespace Carro.App
         {
             using(var conexao = new VeiculoRepositorio())
             {
-                
-                return conexao.GetAll().Where(x => x.CombustivelId == veiculo.CombustivelId && x.CorId == veiculo.CorId).ToList();
-                
+                var lista = conexao.GetAll();
+                if (veiculo.CombustivelId == 0 && veiculo.CorId > 0)
+                {
+                    return lista.Where(x => x.CorId == veiculo.CorId).ToList();
+
+                }else if (veiculo.CorId == 0 && veiculo.CombustivelId > 0)
+                {
+                    return lista.Where(x => x.CombustivelId == veiculo.CombustivelId).ToList();
+                } else if (veiculo.CorId > 0 && veiculo.CombustivelId > 0)
+                {
+                    return lista.Where(x => x.CombustivelId == veiculo.CombustivelId && x.CorId == veiculo.CorId).ToList();
+                } else
+                {
+                    return lista.ToList();
+
+                }
+
+
+
+
             }
         }
 

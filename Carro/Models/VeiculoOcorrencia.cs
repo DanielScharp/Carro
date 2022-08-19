@@ -11,9 +11,8 @@ namespace Carro.Models
         public int Id { get; set; }
         public int VeiculoId { get; set; }
         public string Obs { get; set; }
-        public DateTime? Data { get; set; }
+        public DateTime Data { get; set; }
 
-        [ForeignKey("VeiculoId")]
-        public virtual Veiculo Marca { get; set; }
+
     }
 }

@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Carro.Models.VeiculoOcorrencia>
+
+@{
+    Layout = null;
+}
+
+<table class="table">
+    <tr>
+        <th>Observação</th>
+        <th>Data</th>
+    </tr>
+
+    @foreach (var ocorrencia in Model)
+    {
+        <tr>
+            <td>@ocorrencia.Obs</td>
+            <td>@ocorrencia.Data.ToLongDateString()</td>
+        </tr>
+    }
+</table>
+

@@ -1,0 +1,77 @@
+﻿@using Carro.Models;
+
+@{ ViewBag.Title = "Index";
+
+    IEnumerable<VeiculoCombustivel> listaCombustiveis = ViewBag.ListarCombustiveis;
+    IEnumerable<VeiculoCor> listaCores = ViewBag.ListarCores;
+    IEnumerable<VeiculoOcorrencia> listaOcorrencias = ViewBag.ListarOcorrencia;
+}
+
+
+<div class="row">
+    <div class="col-sm-4" id="DivBusca">
+
+        <form class="form">
+        <label>Combustivel</label>
+            <select class="form-select" name="CombustivelId" id="CombustivelId">
+                <option>Selecione</option>
+                @foreach (var combustivel in listaCombustiveis)
+                {
+    <option value="@combustivel.Id">@combustivel.Nome</option>}
+            </select>
+            <label>Cor</label>
+            <select class="form-select" name="CorId" id="CorId">
+                <option>Selecione</option>
+                @foreach (var cor in listaCores)
+                {
+    <option value="@cor.Id">@cor.Nome</option>}
+
+            </select>
+            <button type="button" class="btn btn-primary mt-3" onclick="retornarVeiculos()">Buscar</button>
+            <button type="button" class="btn btn-primary mt-3" onclick="retornarVeiculo(0)">Novo</button>
+        </form>
+    </div>
+    <div class="col-sm-8" id="DivVeiculo"></div>
+</div>
+
+<script>
+    function retornarVeiculo(id) {
+        $.ajax({
+            url: "/Veiculo/RetornarVeiculo?Id=" + id,
+            method: "get",
+            success: function (data) {
+                $("#DivVeiculo").html(data)
+                retornarOcorrencia(id)
+            }
+        })
+    }
+
+    retornarLista()
+    function retornarLista() {
+        $.ajax({
+            url: "/Veiculo/ListarVeiculos",
+            method: "get",
+            beforeSend: function () {
+                $("#DivVeiculo").html("Aguarde...")
+            },
+            success: function (data) {
+                $("#DivVeiculo").html(data)
+            }
+        })
+    }
+
+    function retornarVeiculos() {
+        var inputCombustivel = document.querySelector("#CombustivelId").value;
+        var inputCor = document.querySelector("#CorId").value;
+        $.ajax({
+            url: "/Veiculo/PesquisarVeiculo?CombustivelId=" + inputCombustivel + "&CorId=" + inputCor,
+            method: "get",
+            beforeSend: function () {
+                $("#DivVeiculo").html("Aguarde...")
+            },
+            success: function (dados) {
+                $("#DivVeiculo").html(dados)
+            }
+        })
+    }
+</script>
